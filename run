@@ -1,0 +1,7 @@
+#!/bin/bash
+pushd $(dirname $0) >/dev/null
+etc_dir="/opt/docker/bind/etc"
+var_dir="/opt/docker/bind/var"
+docker run -d --restart unless-stopped --network host --name bind \
+  --init -v "$etc_dir/bind":/etc/bind -v "$var_dir":/var mattpublic/bind "$@"
+popd >/dev/null
